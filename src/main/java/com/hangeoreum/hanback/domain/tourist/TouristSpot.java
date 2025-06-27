@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class TouristSpot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tourist_id;
+    private Long id;
 
     @Column(unique = true, nullable=false)
     private String contentId;  // 공공 API contentId
