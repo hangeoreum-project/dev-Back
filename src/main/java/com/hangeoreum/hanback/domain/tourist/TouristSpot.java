@@ -23,7 +23,10 @@ public class TouristSpot {
     @Column(nullable=false)
     private Double mapy;    //경도
     
-    private String info;
+    @Column
+    private String info; // 관광지 정보
+
+    @Column
     private LocalDateTime createdAt;
 
     @PrePersist
