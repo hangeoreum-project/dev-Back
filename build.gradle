@@ -2,7 +2,6 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.3'
 	id 'io.spring.dependency-management' version '1.1.7'
-	id 'org.graalvm.buildtools.native' version '0.10.6'
 }
 
 group = 'com.hangeoreum'
@@ -19,26 +18,26 @@ repositories {
 }
 
 dependencies {
-	// ✅ 웹 API용
+	// ✅ 웹 기능
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	// ✅ JPA (Entity, Repository 등 포함)
+	// ✅ JPA + DB
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.mysql:mysql-connector-j' // 또는 h2
 
-	// ✅ Lombok (어노테이션 자동 생성)
+	// ✅ Redis 캐시
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// ✅ Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	// ✅ 개발용 Live Reload
+	// ✅ Devtools (자동 재시작 등)
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	// ✅ 테스트
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-	// ✅ DB 드라이버 (선택: H2 or MySQL)
-	runtimeOnly 'com.h2database:h2' // 개발/테스트용
-	// runtimeOnly 'com.mysql:mysql-connector-j' // 실배포용일 경우 주석 해제
 }
 
 tasks.named('test') {
