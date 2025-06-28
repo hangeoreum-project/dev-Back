@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: tour2025-mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - tour-net
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tour2025-app
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+    networks:
+      - tour-net
+
+volumes:
+  mysql-data:
+
+networks:
+  tour-net:
