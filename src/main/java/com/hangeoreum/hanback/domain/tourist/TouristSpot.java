@@ -2,7 +2,13 @@ package com.hangeoreum.hanback.domain.tourist;
 
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TouristSpot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -15,11 +15,11 @@ public class PostcardViewHistory {
     private PostcardViewHistoryId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("userId")
+    @MapsId("user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("postcardId")
+    @MapsId("postcard_id")
     private Postcard postcard;
 
     private LocalDateTime viewedAt;

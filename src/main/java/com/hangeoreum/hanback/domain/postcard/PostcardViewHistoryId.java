@@ -12,6 +12,6 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class PostcardViewHistoryId implements Serializable {
 
-    private Long userId;
-    private Long postcardId;
+    private Long user_id;
+    private Long postcard_id;
 }

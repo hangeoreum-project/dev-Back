@@ -21,23 +21,28 @@ dependencies {
 	// ✅ 웹 기능
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	// ✅ JPA + DB
+	// ✅ JPA + MySQL
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	runtimeOnly 'com.mysql:mysql-connector-j' // 또는 h2
+	runtimeOnly 'com.mysql:mysql-connector-j:8.4.0'
 
-	// ✅ Redis 캐시
-	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	// ✅ Redis (사용 시에만 활성화)
+	// implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
 	// ✅ Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
 
-	// ✅ Devtools (자동 재시작 등)
+	// ✅ Devtools
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	// ✅ 테스트
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// ✅ .env 환경변수 자동 로딩 (선택)
+	// implementation 'io.github.cdimascio:dotenv-java:2.3.2'
 }
 
 tasks.named('test') {
