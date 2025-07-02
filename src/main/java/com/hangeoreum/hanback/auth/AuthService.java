@@ -14,12 +14,14 @@ public class AuthService {
 
     private final KakaoOAuthService kakaoOAuthService;
     private final UserRepository userRepository;
+    private final JwtTokenProvider jwtTokenProvider; // 주입 방식 변경
 
     public String loginWithKakao(String kakaoAccessToken) {
         KakaoUser kakaoUser = kakaoOAuthService.getUserInfo(kakaoAccessToken);
+
         User user = userRepository.findByKakaoId(String.valueOf(kakaoUser.getKakaoId()))
                 .orElseGet(() -> userRepository.save(User.fromKakaoUser(kakaoUser)));
 
-        return JwtTokenProvider.generateToken(user.getId());
+        return jwtTokenProvider.generateToken(user.getId()); // 인스턴스 메서드 호출
     }
 }
