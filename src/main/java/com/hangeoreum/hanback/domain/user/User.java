@@ -40,5 +40,13 @@ public class User {
             .build();
 }
 
+    public void updateProfile(String nickname, String email) {
+        if (nickname != null) {
+            this.nickname = nickname;
+        }
+        if (email != null) {
+            this.email = email;
+        }
+    }
 }
 

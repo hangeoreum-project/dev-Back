@@ -9,7 +9,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Postcard {
 
     @Id
@@ -33,5 +35,18 @@ public class Postcard {
     @PrePersist
     public void setCreatedAt() {
         this.createdAt = LocalDateTime.now();
+    }
+
+    public void update(String memo, Boolean isPublic) {
+        if (memo != null) {
+            this.memo = memo;
+        }
+        if (isPublic != null) {
+            this.isPublic = isPublic;
+        }
+    }
+
+    public void updatePublicStatus(boolean isPublic) {
+        this.isPublic = isPublic;
     }
 }
