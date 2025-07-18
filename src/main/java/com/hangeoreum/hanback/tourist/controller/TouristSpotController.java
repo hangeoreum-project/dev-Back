@@ -28,4 +28,22 @@ public class TouristSpotController {
         List<TouristSpotResponseDto> touristSpots = touristSpotService.searchTouristSpots(keyword, region);
         return ResponseEntity.ok(touristSpots);
     }
+
+    @GetMapping("/nearby")
+    public ResponseEntity<List<TouristSpotResponseDto>> getNearbyTouristSpots(
+            @RequestParam Double latitude,
+            @RequestParam Double longitude,
+            @RequestParam(defaultValue = "1000") Integer radius) {
+        List<TouristSpotResponseDto> touristSpots = touristSpotService.getNearbyTouristSpots(latitude, longitude, radius);
+        return ResponseEntity.ok(touristSpots);
+    }
+
+    /*
+    @GetMapping("/popular")
+    public ResponseEntity<List<TouristSpotResponseDto>> getPopularTouristSpots(
+            @RequestParam(required = false) String region) {
+        List<TouristSpotResponseDto> touristSpots = touristSpotService.getPopularTouristSpots(region);
+        return ResponseEntity.ok(touristSpots);
+    }
+    */
 }

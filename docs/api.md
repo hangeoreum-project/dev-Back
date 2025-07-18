@@ -187,6 +187,58 @@
     }
     ```
 
+### Get Nearby Tourist Spots
+*   **Endpoint:** `/tourist-spots/nearby`
+*   **Method:** `GET`
+*   **Description:** Retrieves a list of tourist spots based on geographical coordinates. First, it checks for cached data in Redis using a key combination of latitude, longitude, and radius. If cached data exists, it is returned immediately. If not, it calls the external Korea Tourism Organization's API (`locationBasedList1`), caches the results in Redis with a 1-hour TTL, and then returns the data.
+*   **Request:**
+    ```json
+    {
+      "parameters": [
+        {
+          "name": "latitude",
+          "type": "Double",
+          "in": "query",
+          "required": true,
+          "description": "The latitude of the center point for the search."
+        },
+        {
+          "name": "longitude",
+          "type": "Double",
+          "in": "query",
+          "required": true,
+          "description": "The longitude of the center point for the search."
+        },
+        {
+          "name": "radius",
+          "type": "Integer",
+          "in": "query",
+          "required": false,
+          "default": 1000,
+          "description": "The search radius in meters (max: 20000)."
+        }
+      ]
+    }
+    ```
+*   **Response:**
+    ```json
+    {
+      "type": "Array",
+      "description": "A list of tourist spot details.",
+      "example": [
+        {
+          "id": 12345,
+          "contentId": null,
+          "title": "Namsan Tower",
+          "address": "105, Namsangongwon-gil, Yongsan-gu, Seoul",
+          "mapx": 126.9882,
+          "mapy": 37.5512,
+          "info": "A landmark of Seoul..."
+        }
+      ]
+    }
+    ```
+
 ## 3. Course Management
 
 ### Get Course by ID

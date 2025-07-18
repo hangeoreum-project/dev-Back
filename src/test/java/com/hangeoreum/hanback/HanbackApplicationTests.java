@@ -13,7 +13,8 @@ import org.springframework.test.context.TestPropertySource;
     "spring.datasource.url=jdbc:mysql://localhost:3306/tour2025_test?serverTimezone=Asia/Seoul&characterEncoding=UTF-8",
     "spring.datasource.username=test_user",
     "spring.datasource.password=test_pwd",
-    "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver"
+    "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver",
+    "tour-api.service-key=test-service-key"
 })
 class HanbackApplicationTests {
 
