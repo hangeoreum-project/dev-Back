@@ -13,6 +13,26 @@ services:
       - mysql-data:/var/lib/mysql
     networks:
       - tour-net
+    # MySQL 초기화 문제 해결을 위한 추가 설정
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      # env_file과 함께 기본값 설정
+      MYSQL_ROOT_HOST: '%'
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  redis:
+    image: redis:latest
+    container_name: tour2025-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - tour-net
 
   app:
     build:
@@ -24,9 +44,13 @@ services:
     env_file:
       - .env
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
     networks:
       - tour-net
+    restart: unless-stopped
 
 volumes:
   mysql-data:
