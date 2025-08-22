@@ -7,8 +7,6 @@ services:
     restart: always
     ports:
       - "3306:3306"
-    env_file:
-      - .env
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
@@ -17,7 +15,11 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     environment:
       # env_file과 함께 기본값 설정
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PWD}
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
       interval: 30s
