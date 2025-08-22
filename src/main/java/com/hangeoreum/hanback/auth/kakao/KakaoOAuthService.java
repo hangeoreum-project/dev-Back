@@ -25,7 +25,7 @@ public class KakaoOAuthService {
 
         return KakaoUser.builder()
                 .kakaoId(id)
-                .nickname(properties.getString("nickname"))
+                .nickname(properties.optString("nickname"))
                 .email(kakaoAccount.optString("email"))
                 .profileImageUrl(properties.optString("profile_image"))
                 .build();
